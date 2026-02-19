@@ -53,7 +53,7 @@ class RCThrusterNode(Node): #Nœud ROS2 pour piloter un propulseur via MAVROS RC
         if not self.connected:  # ne rien envoyer si MAVROS n’est pas connecté
             return
 
-        u = self.last_cmd.angular.z  # On utilise la rotation Z pour piloter le servo
+        u = self.last_cmd.linear.x  # On utilise la translation X pour piloter les thrusters
         u = clamp(u, -1.0, 1.0)      # Saturation de la commande U dans [-1, 1]
 
         pwm = int(self.pwm_center + 400.0 * u)  # Conversion commande → PWM
